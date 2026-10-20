@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LG AI 가전 브랜드 전략 보고서 — Affectionate Intelligence</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <style>
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-card: #F8F9FA;
+      --border-subtle: #E5E7EB;
+      --lg-red: #A50034;
+      --text-main: #111827;
+      --text-sub: #374151;
+      --text-muted: #6B7280;
+      --slide-width: 1280px;
+      --slide-height: 720px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-card);
+      color: var(--text-main);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      user-select: none;
+    }
+
+    /* Enterprise Workspace Portal Layout */
+    .portal-shell {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+
+    .portal-sidebar {
+      width: 248px;
+      flex-shrink: 0;
+      background: var(--bg-primary);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 40;
+    }
+
+    .sidebar-brand {
+      height: 64px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sidebar-brand-title {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-brand-title strong {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .sidebar-brand-title span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .sidebar-nav-section {
+      padding: 20px 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-nav-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0 10px 6px;
+    }
+
+    .sidebar-menu-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--lg-red);
+      border-left: 4px solid var(--lg-red);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s;
+    }
+
+    .sidebar-menu-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--lg-red);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .sidebar-active-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--lg-red);
+    }
+
+    .sidebar-footer {
+      padding: 16px 18px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-footer-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-sub);
+    }
+
+    .sidebar-footer-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .portal-main {
+      flex: 1;
+      min-width: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 24px;
+      overflow: hidden;
+    }
+
+    /* Deck Container (16:9 Responsive Scaling inside Portal Main) */
+    .deck-viewport {
+      position: relative;
+      width: min(calc(100vw - 296px), calc(92vh * (16 / 9)));
+      aspect-ratio: 16 / 9;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* Top Brand Header inside Deck */
+    .deck-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      padding: 0 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 10;
+      background: var(--bg-primary);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+    }
+
+    .brand-symbol {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--lg-red);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 11px;
+      color: #FFFFFF;
+    }
+
+    .brand-divider {
+      color: var(--border-subtle);
+      font-weight: 400;
+    }
+
+    .header-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .badge-pill {
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--lg-red);
+      color: #FFFFFF;
+      border: 1px solid var(--lg-red);
+    }
+
+    /* Slide Base */
+    .slides-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 84px 44px 68px;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 84px 44px 68px;
+      opacity: 0;
+      transform: translateX(28px);
+      pointer-events: none;
+      transition: opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    /* Slide Title Block */
+    .slide-title-area {
+      margin-bottom: 16px;
+    }
+
+    .slide-step {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--lg-red);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-step::before {
+      content: "";
+      display: inline-block;
+      width: 18px;
+      height: 2px;
+      background: var(--lg-red);
+    }
+
+    .slide-headline {
+      font-size: clamp(22px, 2.3vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      color: var(--text-main);
+    }
+
+    .slide-headline span.highlight {
+      color: var(--lg-red);
+    }
+
+    .slide-subcopy {
+      font-size: clamp(13px, 1.1vw, 15px);
+      color: var(--text-sub);
+      margin-top: 6px;
+    }
+
+    /* Grid & Cards */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2-asym {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-top: 3px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-top-color: var(--lg-red);
+    }
+
+    .card-accent {
+      border: 1px solid var(--border-subtle);
+      border-top: 3px solid var(--lg-red);
+      background: var(--bg-card);
+    }
+
+    /* KPI Row */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .kpi-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-top: 3px solid var(--lg-red);
+      border-radius: 10px;
+      padding: 13px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .kpi-value {
+      font-size: clamp(20px, 2vw, 28px);
+      font-weight: 800;
+      color: var(--lg-red);
+      letter-spacing: -0.02em;
+    }
+
+    .kpi-value small {
+      font-size: 13px;
+      color: var(--text-sub);
+      font-weight: 700;
+      margin-left: 2px;
+    }
+
+    /* Pillar Card Elements */
+    .pillar-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: var(--lg-red);
+      padding: 4px 10px;
+      border-radius: 6px;
+      width: fit-content;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: clamp(16px, 1.35vw, 19px);
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 10px;
+    }
+
+    .bullet-list li {
+      font-size: 12.5px;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bullet-list li strong {
+      color: var(--text-main);
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      color: var(--lg-red);
+      font-weight: 900;
+    }
+
+    /* Slide 2 Architecture Diagram */
+    .arch-banner {
+      margin-top: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .arch-node {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .arch-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--lg-red);
+    }
+
+    .arch-arrow {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* Slide 3 Bar Chart & Roadmap */
+    .chart-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-top: 8px;
+    }
+
+    .chart-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .chart-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    .chart-meta span.val {
+      color: var(--lg-red);
+      font-weight: 700;
+    }
+
+    .bar-track {
+      width: 100%;
+      height: 10px;
+      background: var(--border-subtle);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--lg-red);
+    }
+
+    .roadmap-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-top: 6px;
+    }
+
+    .roadmap-item {
+      padding: 11px 14px;
+      border-radius: 10px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .roadmap-phase {
+      font-size: 11px;
+      font-weight: 800;
+      color: #FFFFFF;
+      background: var(--lg-red);
+      padding: 3px 8px;
+      border-radius: 5px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .roadmap-text h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 3px;
+    }
+
+    .roadmap-text p {
+      font-size: 12px;
+      color: var(--text-sub);
+      line-height: 1.45;
+    }
+
+    /* Slide 3 Interactive Energy Simulator Widget */
+    .sim-widget {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    .sim-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .sim-mode-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: var(--bg-primary);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .sim-mode-btn {
+      padding: 8px 10px;
+      border-radius: 7px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-sub);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .sim-mode-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-card);
+    }
+
+    .sim-mode-btn.active {
+      background: var(--lg-red);
+      color: #FFFFFF;
+      border-color: var(--lg-red);
+    }
+
+    .sim-summary-banner {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--lg-red);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sim-summary-text {
+      font-size: 12px;
+      color: var(--text-sub);
+      font-weight: 500;
+    }
+
+    .sim-summary-text strong {
+      display: block;
+      font-size: 13px;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .sim-total-kwh {
+      text-align: right;
+    }
+
+    .sim-total-kwh .num {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--lg-red);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+
+    .sim-total-kwh .unit {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-left: 2px;
+    }
+
+    .sim-devices {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sim-device-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 9px 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .sim-device-card.pulsing {
+      border-color: var(--lg-red);
+      transform: translateY(-1px);
+    }
+
+    .sim-device-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .sim-device-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .sim-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--lg-red);
+      display: inline-block;
+      animation: simPulse 1.6s infinite ease-in-out;
+    }
+
+    @keyframes simPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.55; }
+    }
+
+    .sim-device-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--lg-red);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 2px 8px;
+      border-radius: 999px;
+      transition: all 0.25s ease;
+    }
+
+    .sim-device-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--text-sub);
+    }
+
+    .sim-device-kwh {
+      font-weight: 800;
+      color: var(--text-main);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sim-device-kwh span {
+      color: var(--lg-red);
+    }
+
+    .sim-bar-track {
+      width: 100%;
+      height: 7px;
+      background: var(--border-subtle);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .sim-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--lg-red);
+      width: 0%;
+      transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Footer Navigation */
+    .deck-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 54px;
+      padding: 0 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-primary);
+      z-index: 10;
+    }
+
+    .dots-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dot-btn {
+      height: 8px;
+      width: 24px;
+      border-radius: 999px;
+      border: none;
+      background: var(--border-subtle);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .dot-btn.active {
+      width: 44px;
+      background: var(--lg-red);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ctrl-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-sub);
+      padding: 6px 13px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .ctrl-btn:hover {
+      background: var(--lg-red);
+      border-color: var(--lg-red);
+      color: #FFFFFF;
+    }
+
+    .slide-counter {
+      font-size: 12px;
+      color: var(--text-main);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      margin: 0 8px;
+    }
+
+    .footer-shortcut-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .kbd-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* Speaker Notes & Executive Q&A Right Sliding Panel */
+    .speaker-notes {
+      position: absolute;
+      top: 64px;
+      right: 0;
+      bottom: 54px;
+      width: 470px;
+      background: var(--bg-primary);
+      border-left: 1px solid var(--border-subtle);
+      border-top: 3px solid var(--lg-red);
+      padding: 20px 24px;
+      z-index: 30;
+      transform: translateX(102%);
+      transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow-y: auto;
+    }
+
+    .speaker-notes.open {
+      transform: translateX(0);
+    }
+
+    .speaker-notes-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--lg-red);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .notes-close-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-sub);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .notes-close-btn:hover {
+      background: var(--lg-red);
+      color: #FFFFFF;
+      border-color: var(--lg-red);
+    }
+
+    .speaker-notes-body {
+      font-size: 12.5px;
+      color: var(--text-sub);
+      line-height: 1.5;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px 13px;
+    }
+
+    .qa-section-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2px;
+    }
+
+    .qa-section-title span.badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: var(--lg-red);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .qa-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .qa-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-top: 2px solid var(--lg-red);
+      border-radius: 10px;
+      padding: 11px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .qa-q {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .qa-q-tag {
+      color: var(--lg-red);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .qa-a {
+      font-size: 12px;
+      color: var(--text-sub);
+      line-height: 1.5;
+      padding-top: 6px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .qa-a strong {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-shell">
+    <!-- Left Workspace Portal Sidebar -->
+    <aside class="portal-sidebar" aria-label="업무 포털 사이드바 메뉴">
+      <div class="sidebar-brand">
+        <span class="brand-symbol">LG</span>
+        <div class="sidebar-brand-title">
+          <strong>LG AI 전략 업무 포털</strong>
+          <span>Executive Intelligence Hub</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav-section">
+        <div class="sidebar-nav-label">Workspace Menu</div>
+        <button type="button" class="sidebar-menu-item" aria-current="page">
+          <span class="sidebar-menu-left">
+            <span class="sidebar-num-badge">1</span>
+            <span>LG 시장 트렌드</span>
+          </span>
+          <span class="sidebar-active-dot"></span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-footer-title">H&A 전략기획담당 · AI 리포트</div>
+        <div class="sidebar-footer-sub">방향키 ← → 이동 · N 발표자 노트</div>
+      </div>
+    </aside>
+
+    <!-- Main Portal Content Area -->
+    <div class="portal-main">
+      <main class="deck-viewport" id="deck">
+    <!-- Top Header -->
+    <header class="deck-header">
+      <div class="brand-logo">
+        <span class="brand-symbol">LG</span>
+        <span>LG Electronics AI Home Appliance Brand Report</span>
+        <span class="brand-divider">|</span>
+        <span style="color: var(--text-sub); font-weight: 500;">Affectionate Intelligence</span>
+      </div>
+      <div class="header-meta">
+        <span class="badge-pill">Executive Summary</span>
+        <span>키보드 ← → 전환</span>
+      </div>
+    </header>
+
+    <!-- Slides Wrapper -->
+    <div class="slides-wrapper">
+
+      <!-- SLIDE 1: 공감지능 비전 & 핵심가치 -->
+      <section class="slide active" data-index="0">
+        <div class="slide-title-area">
+          <div class="slide-step">Slide 01 · Brand Vision & Core Identity</div>
+          <h1 class="slide-headline">기술을 넘어 고객을 배려하는 <span class="highlight">공감지능 (Affectionate Intelligence)</span></h1>
+          <p class="slide-subcopy">LG전자는 인공지능(AI)을 고객을 더 배려하고 공감하는 ‘공감지능’으로 재정의하여 차별화된 스마트 홈 경험을 제공합니다.</p>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-box">
+            <div>
+              <div class="kpi-label">글로벌 LG 스마트 가전 연결 접점</div>
+              <div class="kpi-sub">실시간 라이프 데이터 학습 기반</div>
+            </div>
+            <div class="kpi-value">7억<small>+ 대</small></div>
+          </div>
+          <div class="kpi-box">
+            <div>
+              <div class="kpi-label">가전 전용 온디바이스 AI 칩셋</div>
+              <div class="kpi-sub">자체 개발 AI 코어 프로세서</div>
+            </div>
+            <div class="kpi-value">DQ-C<small>탑재</small></div>
+          </div>
+          <div class="kpi-box">
+            <div>
+              <div class="kpi-label">엔터프라이즈급 보안 시스템</div>
+              <div class="kpi-sub">개인정보 암호화 및 온디바이스 보호</div>
+            </div>
+            <div class="kpi-value">LG Shield<small>적용</small></div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="flex: 1;">
+          <article class="card card-accent">
+            <div>
+              <span class="pillar-tag">01 · Real-time Life Intelligence</span>
+              <h3 class="card-title">실시간 생활 지능</h3>
+              <p class="card-desc">전 세계 수억 대의 스마트 제품과 센서에서 수집되는 실제 생활 데이터를 기반으로 고객의 숨은 의도와 감정 상태까지 파악합니다.</p>
+            </div>
+            <ul class="bullet-list">
+              <li>사용 패턴·주거 환경·날씨 변화 실시간 학습</li>
+              <li>단순 명령 수행을 넘어 선제적(Proactive) 케어 제안</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div>
+              <span class="pillar-tag">02 · Orchestrated Intelligence</span>
+              <h3 class="card-title">조율·제어 지능</h3>
+              <p class="card-desc">개별 가전의 단편적 작동을 넘어, 거실·주방·침실의 다양한 기기와 서비스를 하나의 유기적인 생태계로 조율합니다.</p>
+            </div>
+            <ul class="bullet-list">
+              <li>생성형 AI 허브 중심 공간별 최적 시나리오 자동 실행</li>
+              <li>Matter 표준 및 타사 IoT 기기까지 아우르는 개방형 연결</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div>
+              <span class="pillar-tag">03 · Responsible Intelligence</span>
+              <h3 class="card-title">책임감 있는 지능</h3>
+              <p class="card-desc">고객의 민감한 홈 데이터를 철저히 보호하고 에너지 효율을 극대화하여 신뢰할 수 있는 지속가능한 AI 경험을 구현합니다.</p>
+            </div>
+            <ul class="bullet-list">
+              <li>LG Shield 보안 체계로 데이터 수집·저장·전송 전 과정 암호화</li>
+              <li>AI 절전 모드를 통한 가전 소비전력 최대 30% 절감</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: 주력 AI 가전 라인업 -->
+      <section class="slide" data-index="1">
+        <div class="slide-title-area">
+          <div class="slide-step">Slide 02 · Flagship AI Lineup & Core Tech</div>
+          <h1 class="slide-headline">초개인화 <span class="highlight">UP가전 2.0</span>과 생성형 AI 홈 허브 <span class="highlight">ThinQ ON</span></h1>
+          <p class="slide-subcopy">온디바이스 AI 칩셋과 생성형 AI 허브의 결합으로, 구매 후에도 진화하는 가전 생태계를 완성했습니다.</p>
+        </div>
+
+        <div class="grid-3" style="flex: 1;">
+          <article class="card card-accent">
+            <div>
+              <span class="pillar-tag">AI Home Hub · 생성형 AI</span>
+              <h3 class="card-title">LG ThinQ ON (씽큐 온)</h3>
+              <p class="card-desc">일상 언어로 대화하며 집안 모든 가전과 IoT 기기를 제어하는 생성형 AI 기반의 핵심 AI 홈 허브입니다.</p>
+            </div>
+            <ul class="bullet-list">
+              <li>복합적인 일상 대화 맥락 이해 및 기기 동시 제어</li>
+              <li>수면·외출·귀가 루틴 자동 설계 및 실내 환경 최적화</li>
+              <li>개방형 스마트홈 표준(Matter) 및 Wi-Fi·Thread 완벽 지원</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div>
+              <span class="pillar-tag">Hyper-Personalization · OS 진화</span>
+              <h3 class="card-title">LG UP가전 2.0</h3>
+              <p class="card-desc">가전 전용 AI 칩 ‘DQ-C’와 가전 OS를 탑재하여 고객 라이프스타일에 맞춰 기능이 업그레이드되는 초개인화 가전입니다.</p>
+            </div>
+            <ul class="bullet-list">
+              <li>초기 설정 시 3단계 라이프스타일 진단으로 맞춤 코스 세팅</li>
+              <li>ThinQ 앱을 통한 신규 AI 기능 지속 추가 및 OS 업그레이드</li>
+              <li>세탁·건조·에어컨·냉장고 등 주력 전 라인업 확장</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div>
+              <span class="pillar-tag">Hardware + AI · 핵심 부품 지능화</span>
+              <h3 class="card-title">AI 코어테크 (Core-Tech)</h3>
+              <p class="card-desc">LG전자의 독보적인 모터·컴프레서 기술에 AI 알고리즘을 결합해 본질적인 성능을 혁신했습니다.</p>
+            </div>
+            <ul class="bullet-list">
+              <li><strong>트롬 워시타워/콤보:</strong> 옷감 무게·재질·오염도 감지 AI DD모터</li>
+              <li><strong>휘센 AI 에어컨:</strong> 고객 위치·활동량 분석 레이더 센서 맞춤 기류</li>
+              <li><strong>디오스 AI 냉장고:</strong> 사용 빈도 학습 기반 정온 유지 및 절전 운전</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="arch-banner">
+          <div class="arch-node"><span class="arch-dot"></span> 1. AI 코어테크 부품 (인버터 DD모터·컴프레서)</div>
+          <span class="arch-arrow">➔</span>
+          <div class="arch-node"><span class="arch-dot"></span> 2. 온디바이스 AI 칩셋 (DQ-C & 가전 전용 OS)</div>
+          <span class="arch-arrow">➔</span>
+          <div class="arch-node"><span class="arch-dot"></span> 3. 생성형 AI 허브 (ThinQ ON & 클라우드 오케스트레이션)</div>
+          <span class="arch-arrow">➔</span>
+          <div class="arch-node"><span class="arch-dot"></span> 4. 가사 해방 (Zero Labor Home)</div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: 시장 성과 및 미래 로드맵 -->
+      <section class="slide" data-index="2">
+        <div class="slide-title-area">
+          <div class="slide-step">Slide 03 · Market Impact & Future Roadmap</div>
+          <h1 class="slide-headline">구독 경제 시너지와 <span class="highlight">‘가사 해방(Zero Labor Home)’</span> 미래 로드맵</h1>
+          <p class="slide-subcopy">AI 가전과 케어 구독 서비스의 결합으로 가파른 매출 성장을 달성하며, 주거 공간을 넘어 모빌리티·상업 공간으로 확장합니다.</p>
+        </div>
+
+        <div class="grid-2-asym">
+          <!-- Left: Quantitative Performance -->
+          <div class="card">
+            <div>
+              <span class="pillar-tag">Business Performance · 정량 성과</span>
+              <h3 class="card-title">AI 가전 × 구독(Subscription) 비즈니스 고성장</h3>
+              <p class="card-desc">AI 원격 진단·소모품 적기 배송·전문 케어를 결합한 ‘가전 구독’ 모델이 프리미엄 AI 가전 보급의 핵심 성장 동력으로 자리잡았습니다.</p>
+
+              <div class="chart-rows">
+                <div class="chart-item">
+                  <div class="chart-meta">
+                    <span>LG 가전 구독 사업 연간 매출 돌파 (유니콘 사업 반열)</span>
+                    <span class="val">약 1.8조 원+ (YoY +60%↑)</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 92%;"></div></div>
+                </div>
+
+                <div class="chart-item">
+                  <div class="chart-meta">
+                    <span>국내 주요 대형 가전 구매 고객 중 구독 선택 비중</span>
+                    <span class="val">35% 이상 돌파</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 74%;"></div></div>
+                </div>
+
+                <div class="chart-item">
+                  <div class="chart-meta">
+                    <span>ThinQ 연결 가전 AI 절전/스마트케어 활성 이용 증가율</span>
+                    <span class="val">YoY +48% 성장</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 82%;"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <ul class="bullet-list" style="margin-top: 10px;">
+              <li>단발성 판매에서 <strong>지속적 고객 관계(Recurring Revenue)</strong>로 전환</li>
+              <li><strong>미래 로드맵:</strong> UP가전 2.0 ➔ ThinQ ON ➔ 공간 지능화(SDV·상업공간)</li>
+            </ul>
+          </div>
+
+          <!-- Right: Interactive AI Energy Simulator + Compact Roadmap -->
+          <div class="card card-accent">
+            <div class="sim-widget">
+              <div>
+                <div class="sim-header-row">
+                  <span class="pillar-tag" style="margin-bottom: 4px;">Interactive Simulator · ThinQ ON 시나리오</span>
+                  <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">모드 버튼을 클릭해 보세요</span>
+                </div>
+                <h3 class="card-title" style="margin-bottom: 8px;">모드별 AI 가전 작동 상태 & 실시간 전력 절감 시뮬레이터</h3>
+
+                <!-- Mode Selector Buttons -->
+                <div class="sim-mode-tabs" role="tablist" aria-label="AI 스마트홈 모드 선택">
+                  <button type="button" class="sim-mode-btn active" data-mode="home" onclick="setSimMode('home')">🏠 귀가 모드</button>
+                  <button type="button" class="sim-mode-btn" data-mode="sleep" onclick="setSimMode('sleep')">🌙 취침 모드</button>
+                  <button type="button" class="sim-mode-btn" data-mode="away" onclick="setSimMode('away')">🍃 외출 절전 모드</button>
+                </div>
+              </div>
+
+              <!-- Total kWh Savings Banner -->
+              <div class="sim-summary-banner">
+                <div class="sim-summary-text">
+                  <strong id="simModeTitle">귀가 모드 · 쾌적 케어 & 피크 전력 제어</strong>
+                  <span id="simModeDesc">재실 감지 레이더와 AI 코어테크가 쾌적도를 유지하며 불필요한 기동 전력을 억제합니다.</span>
+                </div>
+                <div class="sim-total-kwh">
+                  <div style="font-size: 10.5px; color: var(--text-muted); font-weight: 700;">일일 예상 총 절감량</div>
+                  <div><span class="num" id="simTotalKwh">-1.45</span><span class="unit">kWh / 일</span></div>
+                </div>
+              </div>
+
+              <!-- 3 Appliances Real-time Status -->
+              <div class="sim-devices" id="simDevicesContainer">
+                <!-- Air Conditioner -->
+                <div class="sim-device-card" id="simCardAircon">
+                  <div class="sim-device-top">
+                    <div class="sim-device-name">
+                      <span class="sim-status-dot"></span>
+                      <span>휘센 AI 에어컨</span>
+                    </div>
+                    <span class="sim-device-badge" id="simBadgeAircon">AI 쾌적기류 · 24°C 맞춤냉방</span>
+                  </div>
+                  <div class="sim-device-meta">
+                    <span id="simDetailAircon">레이더 센서 위치 인식 · 인버터 정속 절전 운전</span>
+                    <span class="sim-device-kwh">절감 <span id="simKwhAircon">-0.85</span> kWh (<span id="simPctAircon">24</span>%↓)</span>
+                  </div>
+                  <div class="sim-bar-track"><div class="sim-bar-fill" id="simBarAircon" style="width: 48%;"></div></div>
+                </div>
+
+                <!-- WashTower -->
+                <div class="sim-device-card" id="simCardWash">
+                  <div class="sim-device-top">
+                    <div class="sim-device-name">
+                      <span class="sim-status-dot"></span>
+                      <span>트롬 오브제 워시타워</span>
+                    </div>
+                    <span class="sim-device-badge" id="simBadgeWash">AI DD 맞춤세탁 · 구김방지 대기</span>
+                  </div>
+                  <div class="sim-device-meta">
+                    <span id="simDetailWash">옷감 무게·오염도 자동 감지 · 최적 에너지 코스</span>
+                    <span class="sim-device-kwh">절감 <span id="simKwhWash">-0.42</span> kWh (<span id="simPctWash">19</span>%↓)</span>
+                  </div>
+                  <div class="sim-bar-track"><div class="sim-bar-fill" id="simBarWash" style="width: 42%;"></div></div>
+                </div>
+
+                <!-- Smart Lighting -->
+                <div class="sim-device-card" id="simCardLight">
+                  <div class="sim-device-top">
+                    <div class="sim-device-name">
+                      <span class="sim-status-dot"></span>
+                      <span>스마트 조명 (Matter 연동)</span>
+                    </div>
+                    <span class="sim-device-badge" id="simBadgeLight">웰컴 무드등 · 조도 70% 자동디밍</span>
+                  </div>
+                  <div class="sim-device-meta">
+                    <span id="simDetailLight">실내 자연광 센서 연동 · 구역별 디밍 제어</span>
+                    <span class="sim-device-kwh">절감 <span id="simKwhLight">-0.18</span> kWh (<span id="simPctLight">30</span>%↓)</span>
+                  </div>
+                  <div class="sim-bar-track"><div class="sim-bar-fill" id="simBarLight" style="width: 35%;"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: 세계 주요국 GDP (구매력지수 PPP 기준) 비교 -->
+      <section class="slide" data-index="3">
+        <div class="slide-title-area">
+          <div class="slide-step">Slide 04 · Global Economic Scale (GDP PPP)</div>
+          <h1 class="slide-headline">세계 주요국 <span class="highlight">GDP (구매력지수 PPP 기준)</span> 비교 및 시장 시사점</h1>
+          <p class="slide-subcopy">국가별 물가 수준을 반영한 실질 구매력(PPP, IMF 추정치 기준) 비교를 통해 글로벌 AI 가전 핵심 타겟 시장을 조망합니다.</p>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-box">
+            <div>
+              <div class="kpi-label">글로벌 1·2위 합산 구매력 (중국·미국)</div>
+              <div class="kpi-sub">세계 실질 소비 여력의 양대 슈퍼마켓</div>
+            </div>
+            <div class="kpi-value">$76.7<small>T (조 달러)</small></div>
+          </div>
+          <div class="kpi-box">
+            <div>
+              <div class="kpi-label">글로벌 사우스 핵심 거점 (인도 · 3위)</div>
+              <div class="kpi-sub">연평균 6~7% 고성장 · 중산층 구매력 급증</div>
+            </div>
+            <div class="kpi-value">$18.9<small>T (세계 3위)</small></div>
+          </div>
+          <div class="kpi-box">
+            <div>
+              <div class="kpi-label">대한민국 경제 규모 (PPP 기준)</div>
+              <div class="kpi-sub">AI 가전 구독·UP가전 2.0 선도 테스트베드</div>
+            </div>
+            <div class="kpi-value">$3.6<small>T (세계 13위)</small></div>
+          </div>
+        </div>
+
+        <div class="grid-2-asym">
+          <!-- Left: PPP GDP Comparison Bar Chart -->
+          <div class="card">
+            <div>
+              <span class="pillar-tag">IMF WEO Estimate · 주요국 GDP (PPP) 순위</span>
+              <h3 class="card-title">주요 7개국 실질 구매력 규모 비교 (단위: 조 달러, USD)</h3>
+
+              <div class="chart-rows" style="gap: 9px; margin-top: 10px;">
+                <div class="chart-item">
+                  <div class="chart-meta">
+                    <span>1위 · 중국 (China) — 내수 볼륨 및 제조·소비 1위</span>
+                    <span class="val">$44.3T</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 100%;"></div></div>
+                </div>
+
+                <div class="chart-item">
+                  <div class="chart-meta">
+                    <span>2위 · 미국 (United States) — 글로벌 프리미엄 가전 최대 시장</span>
+                    <span class="val">$32.4T</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 73%;"></div></div>
+                </div>
+
+                <div class="chart-item">
+                  <div class="chart-meta">
+                    <span>3위 · 인도 (India) — 신흥국 최대 성장 동력 (Global South)</span>
+                    <span class="val">$18.9T</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 43%;"></div></div>
+                </div>
+
+                <div class="chart-item">
+                  <div class="chart-meta">
+                    <span>4위 · 러시아 (Russia) — 유라시아 권역 상위 구매력</span>
+                    <span class="val">$7.5T</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 17%;"></div></div>
+                </div>
+
+                <div class="chart-item">
+                  <div class="chart-meta">
+                    <span>5위 · 일본 (Japan) — 고효율·소형 프리미엄 성숙 시장</span>
+                    <span class="val">$7.3T</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 16.5%;"></div></div>
+                </div>
+
+                <div class="chart-item">
+                  <div class="chart-meta">
+                    <span>6위 · 독일 (Germany) — 유럽 최대 경제권·친환경 고효율 수요</span>
+                    <span class="val">$6.5T</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 14.7%;"></div></div>
+                </div>
+
+                <div class="chart-item">
+                  <div class="chart-meta">
+                    <span>13위 · 대한민국 (South Korea) — 고밀도 프리미엄·구독 선도국</span>
+                    <span class="val">$3.6T</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" style="width: 8.2%;"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Strategic Implications for LG -->
+          <div class="card card-accent">
+            <div>
+              <span class="pillar-tag">Global Market Strategy · 권역별 타겟 전략</span>
+              <h3 class="card-title">구매력(PPP) 지형 변화에 맞춘 LG AI 가전 전략</h3>
+            </div>
+
+            <div class="roadmap-steps">
+              <div class="roadmap-item">
+                <span class="roadmap-phase">북미·유럽</span>
+                <div class="roadmap-text">
+                  <h4>미국(2위)·독일(6위): 초프리미엄 & 고효율 AI 공략</h4>
+                  <p>높은 1인당 구매력을 겨냥해 AI 워시타워·히트펌프 및 <strong>ThinQ ON</strong> 스마트홈 생태계 집중</p>
+                </div>
+              </div>
+
+              <div class="roadmap-item">
+                <span class="roadmap-phase">글로벌 사우스</span>
+                <div class="roadmap-text">
+                  <h4>인도(3위): 폭발적 PPP 성장에 맞춘 볼륨존 장악</h4>
+                  <p>세계 3위 구매력 대국 인도의 중산층 확대에 발맞춰 현지 특화 AI 가전 및 생산·유통 거점 대폭 강화</p>
+                </div>
+              </div>
+
+              <div class="roadmap-item">
+                <span class="roadmap-phase">한국·아시아</span>
+                <div class="roadmap-text">
+                  <h4>한국(13위)·일본(5위): AI 가전 구독 모델의 글로벌 확산</h4>
+                  <p>한국에서 검증된 <strong>UP가전 2.0 + 케어 구독</strong> 결합 모델을 아시아 및 글로벌 주요 시장으로 이식</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Speaker Notes & Executive Q&A Right Sliding Panel (Toggle with 'N') -->
+    <aside class="speaker-notes" id="speakerNotes" aria-live="polite">
+      <div class="speaker-notes-header">
+        <span>Speaker Notes & Executive Q&A (Slide <span id="noteSlideNum">1/4</span>)</span>
+        <button type="button" class="notes-close-btn" onclick="toggleNotes()" title="패널 닫기 (N)">닫기 (N)</button>
+      </div>
+
+      <div class="speaker-notes-body" id="speakerNotesBody"></div>
+
+      <div class="qa-section-title">
+        <span>임원 예상 송곳 질문 TOP 3 & 모범 답변</span>
+        <span class="badge">Executive Q&A</span>
+      </div>
+
+      <div class="qa-list">
+        <div class="qa-card">
+          <div class="qa-q">
+            <span class="qa-q-tag">Q1.</span>
+            <span>경쟁사(삼성 SmartThings 등)나 빅테크 생성형 AI 대비 LG ‘공감지능’만의 실질적 해자(Moat)와 수익화 모델은 무엇입니까?</span>
+          </div>
+          <div class="qa-a">
+            <strong>[모범 답변]</strong> 빅테크가 클라우드 언어모델에 강점이 있다면, LG전자는 <strong>전 세계 7억 대 가전 접점의 실사용 센서 데이터</strong>와 <strong>AI 코어테크(DD모터·컴프레서) 물리 제어권</strong>을 독점하고 있습니다. 특히 자체 AI 칩(DQ-C) 기반 <strong>UP가전 2.0을 ‘가전 구독(연 매출 1.8조 돌파)’과 결합</strong>해 일회성 하드웨어 판매를 넘어 지속적인 고마진 순환 매출(Recurring Revenue) 구조를 이미 입증했습니다.
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q">
+            <span class="qa-q-tag">Q2.</span>
+            <span>전 라인업에 온디바이스 AI 칩(DQ-C)과 생성형 AI 허브(ThinQ ON)를 도입하면 원가(BOM) 및 클라우드 운영비 상승으로 영업이익률이 훼손되지 않습니까?</span>
+          </div>
+          <div class="qa-a">
+            <strong>[모범 답변]</strong> 자체 설계한 가전 전용 ASIC 칩셋 <strong>‘DQ-C’를 내재화하여 범용 NPU 대비 단가를 대폭 절감</strong>했으며, 일상적인 기기 제어·센서 연산의 80% 이상을 <strong>온디바이스(On-Device)로 처리해 클라우드 추론 비용을 최소화</strong>했습니다. 동시에 AI 프리미엄 라인업 비중 확대(ASP 상승)와 구독 케어 결합으로 손익분기점을 넘어선 수익성 개선 효과를 거두고 있습니다.
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="qa-q">
+            <span class="qa-q-tag">Q3.</span>
+            <span>인도 등 글로벌 사우스(PPP 3위) 시장은 가격 민감도가 높은데, 고가형 AI 가전 및 구독 모델이 실제로 안착할 수 있습니까?</span>
+          </div>
+          <div class="qa-a">
+            <strong>[모범 답변]</strong> 인도 시장은 <strong>투트랙(Two-Track) 전략</strong>으로 돌파합니다. 상위 중산층에는 초기 구매 장벽을 낮춘 <strong>‘소액 월 구독 모델’</strong>로 프리미엄 AI 가전 진입을 유도하고, 볼륨존에는 전력 인프라가 불안정한 현지 특성에 맞춘 <strong>‘AI 절전·전압 안정화 코어테크’ 특화 라인업</strong>을 현지 생산 거점(노이다·푸네)에서 직공급하여 원가 경쟁력과 시장 지배력을 동시에 확보하고 있습니다.
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Bottom Footer Controls -->
+    <footer class="deck-footer">
+      <div class="dots-nav" role="tablist" aria-label="슬라이드 선택">
+        <button class="dot-btn active" onclick="goToSlide(0)" title="1장: 공감지능 비전"></button>
+        <button class="dot-btn" onclick="goToSlide(1)" title="2장: 주력 AI 라인업"></button>
+        <button class="dot-btn" onclick="goToSlide(2)" title="3장: 시장 성과 및 로드맵"></button>
+        <button class="dot-btn" onclick="goToSlide(3)" title="4장: 세계 주요국 GDP(PPP) 비교"></button>
+      </div>
+
+      <div class="footer-shortcut-hint">
+        <span><kbd class="kbd-badge">←</kbd> <kbd class="kbd-badge">→</kbd> 방향키 이동</span>
+        <span>·</span>
+        <span><kbd class="kbd-badge">N</kbd> 발표자 노트</span>
+      </div>
+
+      <div class="controls">
+        <button class="ctrl-btn" onclick="prevSlide()">← 이전</button>
+        <span class="slide-counter" id="slideCounter">1 / 4</span>
+        <button class="ctrl-btn" onclick="nextSlide()">다음 →</button>
+        <button class="ctrl-btn" onclick="toggleNotes()" title="발표자 노트 토글 (N)">📝 노트 (N)</button>
+        <button class="ctrl-btn" onclick="toggleFullscreen()" title="전체화면 전환 (F)">⛶ 전체화면</button>
+      </div>
+    </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot-btn');
+    const counter = document.getElementById('slideCounter');
+    const notesPanel = document.getElementById('speakerNotes');
+    const notesBody = document.getElementById('speakerNotesBody');
+    const noteSlideNum = document.getElementById('noteSlideNum');
+
+    const slideNotes = [
+      "1장 발표 포인트: LG전자는 AI를 단순 기술이 아닌 고객을 배려하는 '공감지능(Affectionate Intelligence)'으로 정의합니다. 전 세계 7억 대 이상의 가전 접점과 온디바이스 AI 칩(DQ-C), LG Shield 보안 체계를 3대 핵심 축으로 강조해 주세요.",
+      "2장 발표 포인트: 생성형 AI 홈 허브 'ThinQ ON'을 중심으로 집안 가전이 자연어로 조율되며, 구매 후에도 업그레이드되는 'UP가전 2.0'과 AI 코어테크(DD모터·컴프레서)가 하드웨어와 소프트웨어의 완벽한 결합을 보여줍니다.",
+      "3장 발표 포인트: 가전 구독 사업이 연 매출 1.8조 원을 돌파하며 핵심 성장 동력이 되었습니다. 우측 시뮬레이터의 [귀가 모드], [취침 모드], [외출 절전 모드] 버튼을 직접 클릭하여 에어컨·워시타워·조명의 작동 상태와 예상 전력 절감량(kWh)이 실시간으로 변화하는 모습을 시연해 주세요.",
+      "4장 발표 포인트: IMF 구매력평가(PPP) 기준 세계 주요국 GDP를 보면 중국·미국 양강 체제에 이어 인도가 세계 3위 구매력 대국으로 부상했습니다. LG전자는 북미·유럽 프리미엄 공략과 인도 등 글로벌 사우스 볼륨존 확장을 동시에 추진합니다."
+    ];
+
+    /* Slide 3 Interactive Simulator Data & Animation */
+    const simScenarios = {
+      home: {
+        title: "귀가 모드 · 쾌적 케어 & 피크 전력 제어",
+        desc: "재실 감지 레이더와 AI 코어테크가 쾌적도를 유지하며 불필요한 기동 전력을 억제합니다.",
+        totalKwh: 1.45,
+        aircon: {
+          badge: "AI 쾌적기류 · 24°C 맞춤냉방",
+          detail: "레이더 센서 위치 인식 · 인버터 정속 절전 운전",
+          kwh: 0.85,
+          pct: 24,
+          bar: 48
+        },
+        wash: {
+          badge: "AI DD 맞춤세탁 · 구김방지 대기",
+          detail: "옷감 무게·오염도 자동 감지 · 최적 에너지 코스",
+          kwh: 0.42,
+          pct: 19,
+          bar: 42
+        },
+        light: {
+          badge: "웰컴 무드등 · 조도 70% 자동디밍",
+          detail: "실내 자연광 센서 연동 · 구역별 디밍 제어",
+          kwh: 0.18,
+          pct: 30,
+          bar: 35
+        }
+      },
+      sleep: {
+        title: "취침 모드 · 수면 생체리듬 동기화 & 초절전 운전",
+        desc: "수면 단계별 체온 변화를 학습해 냉방·소음을 제어하고 심야 대기전력을 최소화합니다.",
+        totalKwh: 2.38,
+        aircon: {
+          badge: "AI 수면풍 · 26°C 무풍/간접기류",
+          detail: "수면 호흡·체온 패턴 연동 · 심야 초저소음 절전",
+          kwh: 1.42,
+          pct: 38,
+          bar: 72
+        },
+        wash: {
+          badge: "야간 저소음 건조 · 스팀 리프레시 종료",
+          detail: "심야 경부하 시간대 맞춤 완료 · 대기전력 차단",
+          kwh: 0.64,
+          pct: 29,
+          bar: 62
+        },
+        light: {
+          badge: "수면 케어 소등 · 발밑 센서등 10%",
+          detail: "멜라토닌 유도 색온도(2700K) 후 완전 소등",
+          kwh: 0.32,
+          pct: 54,
+          bar: 68
+        }
+      },
+      away: {
+        title: "외출 절전 모드 · 부재 감지 AI 최대 절전 & 공간 케어",
+        desc: "집안 무인 상태를 감지하여 모든 가전을 초절전 모드로 전환하고 누수·대기전력을 원천 차단합니다.",
+        totalKwh: 3.65,
+        aircon: {
+          badge: "AI 부재 감지 · 자동 열교환기 건조 후 절전",
+          detail: "실내 무인 감지 즉시 냉방 종료 · 곰팡이 방지 송풍",
+          kwh: 2.15,
+          pct: 58,
+          bar: 94
+        },
+        wash: {
+          badge: "원격 스마트케어 · 통살균 후 전원 차단",
+          detail: "ThinQ 원격 제어 대기 · 세탁조 습기 제거 후 절전",
+          kwh: 0.95,
+          pct: 44,
+          bar: 86
+        },
+        light: {
+          badge: "전체 일괄 소등 · 침입 감지 보안 연동",
+          detail: "전 구역 조명 OFF 및 비정상 전력 완전 차단",
+          kwh: 0.55,
+          pct: 92,
+          bar: 92
+        }
+      }
+    };
+
+    let currentSimValues = {
+      total: 1.45,
+      airconKwh: 0.85,
+      airconPct: 24,
+      washKwh: 0.42,
+      washPct: 19,
+      lightKwh: 0.18,
+      lightPct: 30
+    };
+
+    let simAnimFrame = null;
+
+    function setSimMode(modeKey) {
+      const data = simScenarios[modeKey];
+      if (!data) return;
+
+      // Update active button state
+      document.querySelectorAll('.sim-mode-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === modeKey);
+      });
+
+      // Update text & badges
+      document.getElementById('simModeTitle').textContent = data.title;
+      document.getElementById('simModeDesc').textContent = data.desc;
+
+      document.getElementById('simBadgeAircon').textContent = data.aircon.badge;
+      document.getElementById('simDetailAircon').textContent = data.aircon.detail;
+
+      document.getElementById('simBadgeWash').textContent = data.wash.badge;
+      document.getElementById('simDetailWash').textContent = data.wash.detail;
+
+      document.getElementById('simBadgeLight').textContent = data.light.badge;
+      document.getElementById('simDetailLight').textContent = data.light.detail;
+
+      // Update progress bar widths (animated via CSS transition)
+      document.getElementById('simBarAircon').style.width = `${data.aircon.bar}%`;
+      document.getElementById('simBarWash').style.width = `${data.wash.bar}%`;
+      document.getElementById('simBarLight').style.width = `${data.light.bar}%`;
+
+      // Trigger subtle card highlight animation
+      const cards = ['simCardAircon', 'simCardWash', 'simCardLight'];
+      cards.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        el.classList.remove('pulsing');
+        setTimeout(() => {
+          el.classList.add('pulsing');
+          setTimeout(() => el.classList.remove('pulsing'), 380);
+        }, idx * 70);
+      });
+
+      // Animate numerical values smoothly
+      const startVals = { ...currentSimValues };
+      const targetVals = {
+        total: data.totalKwh,
+        airconKwh: data.aircon.kwh,
+        airconPct: data.aircon.pct,
+        washKwh: data.wash.kwh,
+        washPct: data.wash.pct,
+        lightKwh: data.light.kwh,
+        lightPct: data.light.pct
+      };
+
+      if (simAnimFrame) cancelAnimationFrame(simAnimFrame);
+      const duration = 480;
+      const startTime = performance.now();
+
+      function animateNumbers(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+
+        currentSimValues.total = startVals.total + (targetVals.total - startVals.total) * ease;
+        currentSimValues.airconKwh = startVals.airconKwh + (targetVals.airconKwh - startVals.airconKwh) * ease;
+        currentSimValues.airconPct = Math.round(startVals.airconPct + (targetVals.airconPct - startVals.airconPct) * ease);
+        currentSimValues.washKwh = startVals.washKwh + (targetVals.washKwh - startVals.washKwh) * ease;
+        currentSimValues.washPct = Math.round(startVals.washPct + (targetVals.washPct - startVals.washPct) * ease);
+        currentSimValues.lightKwh = startVals.lightKwh + (targetVals.lightKwh - startVals.lightKwh) * ease;
+        currentSimValues.lightPct = Math.round(startVals.lightPct + (targetVals.lightPct - startVals.lightPct) * ease);
+
+        document.getElementById('simTotalKwh').textContent = `-${currentSimValues.total.toFixed(2)}`;
+        document.getElementById('simKwhAircon').textContent = `-${currentSimValues.airconKwh.toFixed(2)}`;
+        document.getElementById('simPctAircon').textContent = currentSimValues.airconPct;
+        document.getElementById('simKwhWash').textContent = `-${currentSimValues.washKwh.toFixed(2)}`;
+        document.getElementById('simPctWash').textContent = currentSimValues.washPct;
+        document.getElementById('simKwhLight').textContent = `-${currentSimValues.lightKwh.toFixed(2)}`;
+        document.getElementById('simPctLight').textContent = currentSimValues.lightPct;
+
+        if (progress < 1) {
+          simAnimFrame = requestAnimationFrame(animateNumbers);
+        }
+      }
+
+      simAnimFrame = requestAnimationFrame(animateNumbers);
+    }
+
+    let current = 0;
+
+    function updateNotesContent() {
+      noteSlideNum.textContent = `${current + 1}/${slides.length}`;
+      notesBody.textContent = slideNotes[current] || "";
+    }
+
+    function goToSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      current = index;
+
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      updateNotesContent();
+    }
+
+    function nextSlide() {
+      goToSlide(current + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(current - 1);
+    }
+
+    function toggleNotes() {
+      notesPanel.classList.toggle('open');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    updateNotesContent();
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === '1') {
+        goToSlide(0);
+      } else if (e.key === '2') {
+        goToSlide(1);
+      } else if (e.key === '3') {
+        goToSlide(2);
+      } else if (e.key === '4') {
+        goToSlide(3);
+      } else if (e.key.toLowerCase() === 'n') {
+        e.preventDefault();
+        toggleNotes();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>
